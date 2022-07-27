@@ -15,25 +15,22 @@ namespace Codecool.HackerNewsClient.Controllers
             var apiHandler = new ApiHandler();
             return (await apiHandler.GetDataByUrl<NewsData>("https://api.hnpwa.com/v0")).Endpoints;
         }
-
-        [HttpGet]
-        [Route("top/{pageNumber}")]
+        
+        [Route("top")]
         public async Task<List<UrlBody>> TopNews(int pageNumber = 1)
         {
             var apiHandler = new ApiHandler();
             return await apiHandler.GetDataByUrl<List<UrlBody>>($"https://api.hnpwa.com/v0/news/{pageNumber}.json");
         }
-
-        [HttpGet]
-        [Route("newest/{pageNumber}")]
+        
+        [Route("newest")]
         public async Task<List<UrlBody>> NewestNews(int pageNumber = 1)
         {
             var apiHandler = new ApiHandler();
             return await apiHandler.GetDataByUrl<List<UrlBody>>($"https://api.hnpwa.com/v0/newest/{pageNumber}.json");
         }
-
-        [HttpGet]
-        [Route("jobs/{pageNumber}")]
+        
+        [Route("jobs")]
         public async Task<List<UrlBody>> JobNews(int pageNumber = 1)
         {
             var apiHandler = new ApiHandler();
