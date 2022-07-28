@@ -17,22 +17,37 @@ namespace Codecool.HackerNewsClient.Controllers
         }
         
         [Route("top")]
-        public async Task<List<UrlBody>> TopNews(int pageNumber = 1)
+        public async Task<List<UrlBody>> TopNews()
         {
+            int pageNumber;
+            if (!int.TryParse(Request.Query["page"].ToString(), out pageNumber))
+            {
+                pageNumber = 1;
+            }
             var apiHandler = new ApiHandler();
             return await apiHandler.GetDataByUrl<List<UrlBody>>($"https://api.hnpwa.com/v0/news/{pageNumber}.json");
         }
         
         [Route("newest")]
-        public async Task<List<UrlBody>> NewestNews(int pageNumber = 1)
+        public async Task<List<UrlBody>> NewestNews()
         {
+            int pageNumber;
+            if (!int.TryParse(Request.Query["page"].ToString(), out pageNumber))
+            {
+                pageNumber = 1;
+            }
             var apiHandler = new ApiHandler();
             return await apiHandler.GetDataByUrl<List<UrlBody>>($"https://api.hnpwa.com/v0/newest/{pageNumber}.json");
         }
         
         [Route("jobs")]
-        public async Task<List<UrlBody>> JobNews(int pageNumber = 1)
+        public async Task<List<UrlBody>> JobNews()
         {
+            int pageNumber;
+            if (!int.TryParse(Request.Query["page"].ToString(), out pageNumber))
+            {
+                pageNumber = 1;
+            }
             var apiHandler = new ApiHandler();
             return await apiHandler.GetDataByUrl<List<UrlBody>>($"https://api.hnpwa.com/v0/jobs/{pageNumber}.json");
         }
