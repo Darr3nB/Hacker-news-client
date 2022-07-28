@@ -6,27 +6,30 @@
     };
 
     async function topNewsButton(event) {
+        removeWelcomeMessage();
+        
         document.querySelector("#display-div").innerHTML = "";
         let requestedData = await apiGet();
 
         cardBuilder(requestedData);
-
-        console.log();
-        return;
     }
 
     async function newestButton(event) {
+        removeWelcomeMessage();
+
+        document.querySelector("#display-div").innerHTML = "";
         let requestedData = await apiGet(event.currentTarget.id);
 
-        console.log();
-        return;
+        cardBuilder(requestedData);
     };
 
     async function jobsButton(event) {
+        removeWelcomeMessage();
+
+        document.querySelector("#display-div").innerHTML = "";
         let requestedData = await apiGet(event.currentTarget.id);
 
-        console.log();
-        return;
+        cardBuilder(requestedData);
     };
 
     async function apiGet(whatButton, pageNumber = 1) {
@@ -56,15 +59,20 @@
         let displayDiv = document.querySelector("#display-div");
         let newData = "";
         requestedData.forEach(function (row) {
-            console.log("Foreach-en belül");
-            newData = newData + `<br><div class="card">Title: ${row.title}
-                                                <br>Time ago: ${row.timeAgo}
-                                                <br>Author: ${row.user}
-                                                <br>Url: ${row.url}</div>`;
+            newData = newData + `<br><div class="card"><a href="${row.url}">${row.title}</a>
+                                                        Time ago: ${row.timeAgo}<br>
+                                                        Author: ${row.user}<br>
+                                                        Url: ${row.url}</div>`;
         });
 
         displayDiv.innerHTML = newData;
     };
+
+    function removeWelcomeMessage() {
+        if (document.querySelector(".jumbotron")) {
+            document.querySelector(".jumbotron").remove();
+        }
+    }
 
     initEventListener();
 };
